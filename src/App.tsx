@@ -1,19 +1,39 @@
 import React from 'react'
-import './App.css'
 
-// import { useAuthState } from 'react-firebase-hooks/auth'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import styled from 'styled-components'
+import { auth } from './firebase/client'
 // import { useCollectionData } from 'react-firebase-hooks/firestore'
 
-// import ChatApp from './components/ChatApp'
-// import SignIn from './components/SignIn'
+import ChatApp from './pages/ChatApp'
+import SignIn from './pages/SignIn'
+
+const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  background-color: #444;
+`
+
+const Section = styled.section`
+  background-color: #FFF;
+  width: 100%;
+  height: 100%;
+  @media (min-width: 480px) {
+    width: 480px;
+    height: 90vh; 
+  }
+`
 
 function App () {
+  const [user] = useAuthState(auth)
   return (
-    <div className="App">
-      <section>
-        {/* {user ? <ChatApp /> : <SignIn />} */}
-      </section>
-    </div>
+    <Container className="App">
+      <Section>
+        {user ? <ChatApp /> : <SignIn />}
+      </Section>
+    </Container>
   )
 }
 
