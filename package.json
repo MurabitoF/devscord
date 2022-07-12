@@ -40,7 +40,7 @@
   },
   "main": "index.js",
   "author": "MurabitoF <francomurabito@outlook.com>",
-  "license": "MIT",
+  "license": "",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
