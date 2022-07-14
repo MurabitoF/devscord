@@ -6,6 +6,7 @@ import { firestore } from '../firebase/client'
 import styled from 'styled-components'
 import Message from '../components/Message'
 import HeaderChatRoom from '../components/HeaderChatRoom'
+import Spinner from '../components/Spinner'
 
 const ChatRoomContainer = styled.div`
   display:flex;
@@ -35,22 +36,28 @@ const RoomContainer = styled.div`
 const ChatRoom = () => {
   const messageRef = collection(firestore, 'message')
   const q = query(messageRef, orderBy('createdAt', 'desc'), limit(25))
-  const [messages] = useCollectionData(q)
+  const [messages, loading] = useCollectionData(q)
 
   const scroll = useRef() as React.MutableRefObject<HTMLDivElement>
 
   useEffect(() => {
-    scroll.current.scrollIntoView({ behavior: 'auto' })
+    if (!loading) {
+      scroll.current.scrollIntoView({ behavior: 'auto' })
+    }
   }, [])
+
+  if (loading) {
+    return <Spinner />
+  }
 
   return (
     <RoomContainer>
       <HeaderChatRoom />
       <ChatRoomContainer>
         <div ref={scroll}></div>
-        {messages?.map((message) => {
+        {messages?.map((message, i) => {
           return <Message
-            key={message.id}
+            key={i}
             message={message.message}
             username={message.user.displayName}
             photoURL={message.user.photoURL}

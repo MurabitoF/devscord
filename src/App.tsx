@@ -2,6 +2,7 @@ import React from 'react'
 
 import { useAuthState } from 'react-firebase-hooks/auth'
 import styled from 'styled-components'
+import Spinner from './components/Spinner'
 import { auth } from './firebase/client'
 // import { useCollectionData } from 'react-firebase-hooks/firestore'
 
@@ -28,7 +29,18 @@ const Section = styled.section`
 `
 
 function App () {
-  const [user] = useAuthState(auth)
+  const [user, loading] = useAuthState(auth)
+
+  if (loading) {
+    return (
+      <Container>
+        <Section>
+          <Spinner />
+        </Section>
+      </Container>
+    )
+  }
+
   return (
     <Container className="App">
       <Section>
