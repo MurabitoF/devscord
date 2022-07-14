@@ -20,7 +20,7 @@ const Container = styled.div`
 const Section = styled.section`
   background-color: #191224;
   width: 100%;
-  height: 100%;
+  height: 100vh;
 
   @media (min-width: 480px) {
     width: 480px;

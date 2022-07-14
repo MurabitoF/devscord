@@ -11,9 +11,6 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: .5em 1em;
-  
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 
   & > h1{
     margin: 0;

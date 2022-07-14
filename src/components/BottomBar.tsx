@@ -10,7 +10,6 @@ const Bar = styled.div`
   justify-content: space-around;
   width: 100%;
   max-width: 456px;
-  backdrop-filter: blur(10px);
 `
 interface Props {
   scroll: React.MutableRefObject<HTMLDivElement>

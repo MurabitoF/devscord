@@ -20,8 +20,11 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
-  padding: 3em;
   text-align: center;
+  
+  @media (min-width: 480px) {
+    padding: 3em;
+  }
 `
 const marginRight = css`
   & > svg {
