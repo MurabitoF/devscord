@@ -6,9 +6,10 @@ export default () => {
 
   if (user === null || user === undefined) return null
 
-  const { displayName, photoURL } = user
+  const { displayName, photoURL, uid } = user
 
   return {
+    uid,
     displayName,
     photoURL
   }
