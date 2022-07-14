@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import BottomBar from '../components/BottomBar'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { collection, limit, orderBy, query } from 'firebase/firestore'
+import { collection, orderBy, query } from 'firebase/firestore'
 import { firestore } from '../firebase/client'
 import styled from 'styled-components'
 import Message from '../components/Message'
@@ -35,7 +35,7 @@ const RoomContainer = styled.div`
 
 const ChatRoom = () => {
   const messageRef = collection(firestore, 'message')
-  const q = query(messageRef, orderBy('createdAt', 'desc'), limit(25))
+  const q = query(messageRef, orderBy('createdAt', 'desc'))
   const [messages, loading] = useCollectionData(q)
 
   const scroll = useRef() as React.MutableRefObject<HTMLDivElement>
