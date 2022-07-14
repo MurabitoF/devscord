@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import BottomBar from '../components/BottomBar'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { collection, limit, orderBy, query } from 'firebase/firestore'
@@ -38,6 +38,10 @@ const ChatRoom = () => {
   const [messages] = useCollectionData(q)
 
   const scroll = useRef() as React.MutableRefObject<HTMLDivElement>
+
+  useEffect(() => {
+    scroll.current.scrollIntoView({ behavior: 'auto' })
+  }, [])
 
   return (
     <RoomContainer>
