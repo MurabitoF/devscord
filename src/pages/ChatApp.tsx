@@ -1,13 +1,16 @@
 import React from 'react'
 
-import { getAuth } from 'firebase/auth'
+import { User } from 'firebase/auth'
+import ChatRoom from './ChatRoom'
 
-const auth = getAuth()
+interface Props {
+  user: User
+}
 
-const ChatApp = () => {
-  return (<>
-    <div>ChatApp</div>
-    <button onClick={() => auth.signOut()}>Sign Out</button>
+const ChatApp = ({ user }:Props) => {
+  return (
+    <>
+      <ChatRoom />
     </>
   )
 }

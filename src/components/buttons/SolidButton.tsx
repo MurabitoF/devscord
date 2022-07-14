@@ -1,18 +1,20 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { FlattenSimpleInterpolation } from 'styled-components'
 
 interface Props {
   children: React.ReactNode
-  onClick: () => void,
-  bgColor: string,
-  color: string
+  onClick?: any,
+  type?: 'button' | 'submit',
+  bgColor?: string,
+  color?: string
+  css?: FlattenSimpleInterpolation
 }
 
-const SolidButton = ({ children, onClick, bgColor, color }:Props) => {
+const SolidButton = ({ children, onClick, bgColor, color, css, type }:Props) => {
   const StyleButton = styled.button`
-    background-color: ${bgColor};
-    color: ${color};
-    padding: .75em 1rem;
+    background-color: ${bgColor || '#fff'};
+    color: ${color || '#000'};
+    padding: .75em;
     border: none;
     border-radius: 9999px;
     display: flex;
@@ -28,12 +30,10 @@ const SolidButton = ({ children, onClick, bgColor, color }:Props) => {
       filter: opacity(.85);
     }
 
-    svg {
-      margin-right: 10px
-    }
+    ${css}
   `
   return (
-    <StyleButton onClick={onClick}>{children}</StyleButton>
+    <StyleButton type={type} onClick={onClick}>{children}</StyleButton>
   )
 }
 

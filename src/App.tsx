@@ -17,9 +17,10 @@ const Container = styled.div`
 `
 
 const Section = styled.section`
-  background-color: #FFF;
+  background-color: #191224;
   width: 100%;
   height: 100%;
+
   @media (min-width: 480px) {
     width: 480px;
     height: 90vh; 
@@ -31,7 +32,7 @@ function App () {
   return (
     <Container className="App">
       <Section>
-        {user ? <ChatApp /> : <SignIn />}
+        {user ? <ChatApp user={user} /> : <SignIn />}
       </Section>
     </Container>
   )
