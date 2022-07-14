@@ -3,7 +3,7 @@ import { getAuth, GithubAuthProvider, signInWithPopup, User } from 'firebase/aut
 import { addDoc, collection, getDocs, getFirestore, Timestamp } from 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDCSNhC6AYUk11WP1EB8HlUPMukHORg2Cs',
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: 'devscord-1c632.firebaseapp.com',
   projectId: 'devscord-1c632',
   storageBucket: 'devscord-1c632.appspot.com',
