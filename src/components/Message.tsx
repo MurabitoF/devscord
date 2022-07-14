@@ -8,6 +8,11 @@ interface Props {
   photoURL: string,
 }
 
+interface MessageContProps {
+  username: string,
+  displayName: string | null,
+}
+
 const Image = styled.img`
   width: 100%;
   height: 100%;
@@ -32,23 +37,22 @@ const MessageDiv = styled.div`
   border-radius: 9999px;
 `
 
+const MessageCont = styled.div<MessageContProps>`
+  display: flex;
+  flex-direction: ${props => (props.displayName === props.username ? 'row-reverse' : 'row')};
+  justify-content: space-around;
+  align-items: center;
+  align-self: ${props => (props.displayName === props.username ? 'flex-end' : 'flex-start')};
+  word-break: break-all;
+  max-width: 75%;
+`
+
 const Message = ({ message, username, photoURL }:Props) => {
   const user = useUser()
-
   const displayName = user ? user.displayName : 'Desconocido'
-  console.log(displayName, username)
 
-  const MessageCont = styled.div`
-    display: flex;
-    flex-direction: ${displayName === username ? 'row-reverse' : 'row'};
-    justify-content: space-around;
-    align-items: center;
-    align-self: ${displayName === username ? 'flex-end' : 'flex-start'};
-    word-break: break-all;
-    max-width: 75%;
-  `
   return (
-    <MessageCont>
+    <MessageCont displayName={displayName} username={username}>
       <ImageConteiner>
         <Image src={photoURL} />
       </ImageConteiner>

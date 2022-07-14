@@ -10,10 +10,9 @@ interface Props {
   css?: FlattenSimpleInterpolation
 }
 
-const SolidButton = ({ children, onClick, bgColor, color, css, type }:Props) => {
-  const StyleButton = styled.button`
-    background-color: ${bgColor || '#fff'};
-    color: ${color || '#000'};
+const StyleButton = styled.button<Props>`
+    background-color: ${props => props.bgColor || '#fff'};
+    color: ${props => props.color || '#000'};
     padding: .75em;
     border: none;
     border-radius: 9999px;
@@ -30,10 +29,12 @@ const SolidButton = ({ children, onClick, bgColor, color, css, type }:Props) => 
       filter: opacity(.85);
     }
 
-    ${css}
+    ${props => props.css}
   `
+
+const SolidButton = ({ children, onClick, type, ...rest }:Props) => {
   return (
-    <StyleButton type={type} onClick={onClick}>{children}</StyleButton>
+    <StyleButton type={type} onClick={onClick} {...rest}>{children}</StyleButton>
   )
 }
 
