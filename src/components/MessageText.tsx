@@ -29,6 +29,10 @@ const Form = styled.form`
 const btnCss = css`
   border-radius: 0 9999px 9999px 0;
   padding: .75em 1em;
+
+  &:hover{
+    filter: brightness(1.3);
+  }
 `
 
 interface Props {
