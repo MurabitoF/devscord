@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import SolidButton from '../components/buttons/SolidButton'
 import Github from '../components/icons/Github'
 import { signInWithGithub } from '../firebase/client'
@@ -14,6 +14,7 @@ const H2 = styled.h1`
 `
 
 const Container = styled.div`
+  color: #F2F2F2;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,14 +23,19 @@ const Container = styled.div`
   padding: 3em;
   text-align: center;
 `
+const marginRight = css`
+  & > svg {
+    margin-right: 5px;
+  }
+`
 
 const SignIn = () => {
   return (
   <Container>
-    <H1>Welcome to <span style={{ color: '#3c0593' }}>Devscord</span></H1>
+    <H1>Welcome to <span style={{ color: '#5c3894' }}>Devscord</span></H1>
     <H2>Sign In</H2>
-    <SolidButton bgColor="#030303" color="#FFF" onClick={signInWithGithub}>
-      <Github width={24} height={24} fill='#fff'/> Sign In with Github
+    <SolidButton css={marginRight} bgColor="#030303" color="#F2F2F2" onClick={signInWithGithub}>
+      <Github width={24} height={24} fill='#F2F2F2'/> Sign In with Github
     </SolidButton>
   </Container>
   )
