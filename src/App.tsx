@@ -4,7 +4,6 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import styled from 'styled-components'
 import Spinner from './components/Spinner'
 import { auth } from './firebase/client'
-// import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 import ChatApp from './pages/ChatApp'
 import SignIn from './pages/SignIn'
@@ -14,7 +13,7 @@ const Container = styled.div`
   height: 100vh;
   display: grid;
   place-items: center;
-  background-color: #444;
+  background-color: #534c5c;
 `
 
 const Section = styled.section`

@@ -55,7 +55,7 @@ const MessageText = ({ scroll }:Props) => {
   return (
     <Form onSubmit={sendMessage}>
       <Area value={message} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMessage(e.target.value)} />
-      <SolidButton type='submit' css={btnCss} bgColor="#191224">
+      <SolidButton type='submit' css={btnCss} bgColor="#35264d">
         <Send fill='#F2F2F2' width={18} height={18} />
       </SolidButton>
     </Form>
