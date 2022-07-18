@@ -1,11 +1,14 @@
+import { Timestamp } from 'firebase/firestore'
 import React from 'react'
 import styled from 'styled-components'
 import useUser from '../hooks/useUser'
+import { getTimeAgo } from '../utils/timeAgo'
 
 interface Props {
   message: string,
   username: string,
   photoURL: string,
+  createAt: Timestamp
 }
 
 interface MessageContProps {
@@ -34,7 +37,19 @@ const MessageDiv = styled.div`
   color: #F2F2F2;
   margin: 10px 0;
   padding: 10px 15px;
-  border-radius: 9999px;
+  border-radius: 25px;
+  min-width: 100px;
+`
+const NameDiv = styled.div`
+  font-size: .75rem;
+  font-weight: 700;
+  color: #74a5ff;
+`
+
+const TimeAgo = styled.div`
+  color: #74a5ff;
+  font-size: .75rem;
+  text-align: right;
 `
 
 const MessageCont = styled.div<MessageContProps>`
@@ -47,9 +62,11 @@ const MessageCont = styled.div<MessageContProps>`
   max-width: 75%;
 `
 
-const Message = ({ message, username, photoURL }:Props) => {
+const Message = ({ message, username, photoURL, createAt }:Props) => {
   const user = useUser()
   const displayName = user ? user.displayName : 'Desconocido'
+
+  console.log(createAt)
 
   return (
     <MessageCont displayName={displayName} username={username}>
@@ -57,7 +74,15 @@ const Message = ({ message, username, photoURL }:Props) => {
         <Image src={photoURL} />
       </ImageConteiner>
       <MessageDiv>
-        {message}
+        <NameDiv>
+          {username === displayName ? 'You' : username}
+        </NameDiv>
+        <div>
+          {message}
+        </div>
+        <TimeAgo>
+          {getTimeAgo(createAt.toMillis())}
+        </TimeAgo>
       </MessageDiv>
     </MessageCont>
   )

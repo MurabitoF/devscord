@@ -61,6 +61,7 @@ const ChatRoom = () => {
             message={message.message}
             username={message.user.displayName}
             photoURL={message.user.photoURL}
+            createAt={message.createdAt}
             />
         })}
       </ChatRoomContainer>
