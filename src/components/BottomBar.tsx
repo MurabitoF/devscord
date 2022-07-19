@@ -13,12 +13,13 @@ const Bar = styled.div`
 `
 interface Props {
   scroll: React.MutableRefObject<HTMLDivElement>
+  roomId: string,
 }
 
-const BottomBar = ({ scroll }:Props) => {
+const BottomBar = ({ scroll, roomId }:Props) => {
   return (
     <Bar>
-      <MessageText scroll={scroll} />
+      <MessageText scroll={scroll} roomId={roomId} />
     </Bar>
   )
 }

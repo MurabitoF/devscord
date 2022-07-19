@@ -5,12 +5,15 @@ import { collection, orderBy, query } from 'firebase/firestore'
 import { firestore } from '../firebase/client'
 import styled from 'styled-components'
 import Message from '../components/Message'
-import HeaderChatRoom from '../components/HeaderChatRoom'
+import HeaderChatRoom from '../components/HeaderChatApp'
 import Spinner from '../components/Spinner'
+import { useParams, useNavigate } from 'react-router-dom'
+import chatRooms from '../data/chatRooms'
 
 const ChatRoomContainer = styled.div`
   display:flex;
   flex-direction:column-reverse;
+  height: 100%;
   padding: .5em;
   overflow-y: scroll;
   position: relative;
@@ -34,10 +37,18 @@ const RoomContainer = styled.div`
 `
 
 const ChatRoom = () => {
-  const messageRef = collection(firestore, 'message')
-  const q = query(messageRef, orderBy('createdAt', 'desc'))
-  const [messages, loading] = useCollectionData(q)
+  const params = useParams()
+  const room = chatRooms.find(x => x.id === params.chatRoom)
 
+  if (!room) {
+    const nav = useNavigate()
+    nav('/')
+  }
+  const roomId = room?.id ? room.id : ''
+  const [messages, loading] = useCollectionData(query(
+    collection(firestore, 'chat-rooms', roomId, 'messages'),
+    orderBy('timestamp', 'desc')
+  ))
   const scroll = useRef() as React.MutableRefObject<HTMLDivElement>
 
   useEffect(() => {
@@ -52,20 +63,20 @@ const ChatRoom = () => {
 
   return (
     <RoomContainer>
-      <HeaderChatRoom />
+      <HeaderChatRoom title={room?.title} />
       <ChatRoomContainer>
         <div ref={scroll}></div>
         {messages?.map((message, i) => {
           return <Message
             key={i}
-            message={message.message}
+            message={message.text}
             username={message.user.displayName}
             photoURL={message.user.photoURL}
-            createAt={message.createdAt}
+            createAt={message.timestamp}
             />
         })}
       </ChatRoomContainer>
-      <BottomBar scroll={scroll}/>
+      <BottomBar scroll={scroll} roomId={roomId} />
     </RoomContainer>
   )
 }

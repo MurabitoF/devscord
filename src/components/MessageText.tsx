@@ -37,16 +37,17 @@ const btnCss = css`
 
 interface Props {
   scroll: React.MutableRefObject<HTMLDivElement>
+  roomId: string
 }
 
-const MessageText = ({ scroll }:Props) => {
+const MessageText = ({ scroll, roomId }:Props) => {
   const [message, setMessage] = useState('')
   const user = useUser()
 
   const sendMessage = (event: React.SyntheticEvent) => {
     event.preventDefault()
     if (message.trim().length !== 0) {
-      addNewMessage(message, user)
+      addNewMessage(message, user, roomId)
       setMessage('')
       scroll.current.scrollIntoView({ behavior: 'smooth' })
     }

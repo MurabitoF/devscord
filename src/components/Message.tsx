@@ -1,4 +1,3 @@
-import { Timestamp } from 'firebase/firestore'
 import React from 'react'
 import styled from 'styled-components'
 import useUser from '../hooks/useUser'
@@ -8,7 +7,7 @@ interface Props {
   message: string,
   username: string,
   photoURL: string,
-  createAt: Timestamp
+  createAt: Date
 }
 
 interface MessageContProps {
@@ -81,7 +80,7 @@ const Message = ({ message, username, photoURL, createAt }:Props) => {
           {message}
         </div>
         <TimeAgo>
-          {getTimeAgo(createAt.toMillis())}
+          {getTimeAgo(createAt)}
         </TimeAgo>
       </MessageDiv>
     </MessageCont>
