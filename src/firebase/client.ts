@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth, GithubAuthProvider, signInWithPopup, User } from 'firebase/auth'
-import { addDoc, collection, getDocs, getFirestore, Timestamp } from 'firebase/firestore'
+import { collection, doc, getFirestore, setDoc } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -23,24 +23,15 @@ export const signInWithGithub = () => {
 
 export const firestore = getFirestore(app)
 
-export const addNewMessage = async (message:string, user:Partial<User>|null) => {
+export const addNewMessage = async (message:string, user:Partial<User>|null, roomId: string) => {
   try {
-    const docRef = await addDoc(collection(firestore, 'message'), {
-      message,
+    const newMessageRef = doc(collection(firestore, 'chat-rooms', roomId, 'messages'))
+    await setDoc(newMessageRef, {
       user,
-      createdAt: Timestamp.now()
+      text: message,
+      timestamp: Date.now()
     })
-    console.log('Document written with ID: ', docRef.id)
   } catch (e) {
     console.error('Error adding document: ', e)
-  }
-}
-
-export const fetchLastMessages = async () => {
-  try {
-    const lastMessages = await getDocs(collection(firestore, 'messages'))
-    console.log(lastMessages)
-  } catch (error) {
-    console.log(error)
   }
 }
