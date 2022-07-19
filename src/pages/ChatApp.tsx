@@ -1,6 +1,8 @@
 import React from 'react'
 
+import { Routes, Route } from 'react-router-dom'
 import { User } from 'firebase/auth'
+import ChatList from './ChatList'
 import ChatRoom from './ChatRoom'
 
 interface Props {
@@ -10,7 +12,11 @@ interface Props {
 const ChatApp = ({ user }:Props) => {
   return (
     <>
-      <ChatRoom />
+      <Routes>
+        <Route path="/" element={<ChatList />}>
+        </Route>
+        <Route path="/room/:chatRoom" element={<ChatRoom />} />
+      </Routes>
     </>
   )
 }
