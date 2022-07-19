@@ -2,7 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { auth } from '../firebase/client'
 import SolidButton from './buttons/SolidButton'
-import Gear from './icons/Gear'
+import { Link } from 'react-router-dom'
+import Arrow from './icons/Arrow'
+import Exit from './icons/Exit'
 
 const Header = styled.div`
   background-color: rgba(0, 0, 0, .3);
@@ -17,15 +19,27 @@ const Header = styled.div`
   }
 `
 
-const HeaderChatRoom = () => {
+interface Props {
+  title?: string,
+}
+
+const HeaderChatApp = ({ title }:Props) => {
   return (
     <Header>
-      <h1>CHAT</h1>
+      {
+        title && (
+        <Link to='/'>
+          <Arrow fill='#F2F2F2' width={30} height={30}/>
+        </Link>
+        )
+      }
+
+      <h1>{title || 'Devscord'}</h1>
       <SolidButton onClick={() => auth.signOut()} bgColor='#F2F2F2'>
-        <Gear fill='#030303' width={20} height={20} />
+        <Exit fill='#030303' width={20} height={20} />
       </SolidButton>
     </Header>
   )
 }
 
-export default HeaderChatRoom
+export default HeaderChatApp
