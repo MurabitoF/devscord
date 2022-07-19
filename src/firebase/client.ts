@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getAuth, GithubAuthProvider, signInWithPopup, User } from 'firebase/auth'
+import { getAuth, getRedirectResult, GithubAuthProvider, signInWithRedirect, User } from 'firebase/auth'
 import { collection, doc, getFirestore, setDoc } from 'firebase/firestore'
 
 const firebaseConfig = {
@@ -18,7 +18,8 @@ export const auth = getAuth(app)
 
 export const signInWithGithub = () => {
   const provider = new GithubAuthProvider()
-  return signInWithPopup(auth, provider)
+  signInWithRedirect(auth, provider)
+  return getRedirectResult(auth)
 }
 
 export const firestore = getFirestore(app)
